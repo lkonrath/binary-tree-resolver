@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Binary Tree Resolver</title>
+  <link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+  <script src="BTR.js"></script>
+  <p>
+      <input type="text" id='expression' name='expression' value='(((P ∧ Q) ∧ (Q ∧ R)) → ((Q ↔ P) ∨ (¬¬ R)))'/>
+      <button id='btn-go'>Go!</button>
+  </p>
+  <div id='widget' class="body">
+  </div>
+  <script>
+      function buildExpressionTree(node){
+          
+          var wrapper = document.createElement('div'); 
+          var header = document.createElement('div'); 
+          var body = document.createElement('div');
+          
+          header.setAttribute('class','header');
+          body.setAttribute('class','body');
+          wrapper.setAttribute('class','wrapper');
+          
+          if(node.subnodes.length > 0 ){
+             body.appendChild(buildExpressionTree(node.subnodes[0]));
+             if(node.subnodes[1] != undefined){
+                body.appendChild(buildExpressionTree(node.subnodes[1]));
+             }
+          }
+          
+          header.innerHTML = node.expression;
+          wrapper.appendChild(header);
+          wrapper.appendChild(body);
+          
+          return wrapper;
+      }
+      
+      function displayExpression(expression){
+          var nodes = getNodes(expression);
+          console.log(nodes)
+          var tree = buildExpressionTree(nodes);
+          var widget = document.getElementById('widget');
+          widget.appendChild(tree);
+          console.log(tree);
+      }
+      
+      window.onload = function(){
+          var button = document.getElementById('btn-go');
+          button.addEventListener('click',function(){
+             var expression = document.getElementById('expression').value;
+             displayExpression(expression);
+          });
+      }
+  </script>
+</body>
+</html>

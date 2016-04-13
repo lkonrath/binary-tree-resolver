@@ -1,0 +1,13 @@
+.wrapper {
+    display: table-cell;
+}
+
+.header {
+ 
+}
+
+.body {
+    display: table;
+    width: 100%;
+    text-align: center;
+}
