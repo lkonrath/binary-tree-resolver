@@ -16,6 +16,7 @@ String.prototype.replaceAt = function(position, char){ //substitui um caractere 
 }
 
 var connectors = ['∧','∨','→','↔'];
+var negation = '¬';
 
 function isConnector(char){
     return connectors.indexOf(char) >= 0 // encontrou?
@@ -127,15 +128,15 @@ function getNodes(expression){
     
     node.subnodes = [];
     
-    if(hasConnector){
+    if(hasConnector){ // Divide the expression in two parts based on the connector
         node.subnodes.push(getNodes(leftExpression));
         node.subnodes.push(getNodes(rightExpression));  
     }
-    // else{
-    //     node.subnodes.push(expression);
-    // }
+    else{ // Create sub nodes for negations
+        if(_expression.charAt(0) == negation){
+            node.subnodes.push(getNodes(_expression.substring(1,_expression.length)));
+        }
+    }
         
     return node;
 }
-    
-// (((P ∧ Q) ∧ (Q ∧ R)) → ((Q ↔ P) ∨ (¬¬ R)))
