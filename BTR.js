@@ -18,6 +18,60 @@ String.prototype.replaceAt = function(position, char){ //substitui um caractere 
 var connectors = ['∧','∨','→','↔'];
 var negation = '¬';
 
+
+function getConnectors(){
+    //Orientation options: LR = left to right , RL = right to left
+    //Precedence: 1 more important than 2
+    var connectors = [];
+    
+    connectors.push({ // connectors must be a prototype?
+        character: '∧',
+        type:'conjunction',
+        precedence: 2,
+        orientation: 'LR',
+        position: 0 // stores and identify the position of connector in a expression 
+    });
+    
+    connectors.push({
+        character: '∨',
+        type:'disjunction',
+        precedence: 2,
+        orientation: 'LR',
+        position: 0  
+    });    
+    
+    connectors.push({
+        character: '→',
+        type:'conditional',
+        precedence: 1,
+        orientation: 'RL',
+        position: 0  
+    });
+    
+    connectors.push({
+        character: '↔',
+        type:'biconditional',
+        precedence: 1,
+        orientation: 'LR',
+        position: 0  
+    });    
+    
+    return connectors;
+}
+function getConnector(character){
+    
+    var connectors = getConnectors();
+    
+    for(var i=0; i < connectors.length; i++){ // search for the connector corresponding 
+        if(connectors[i].character == character){
+            return connectors[i];
+        }
+    }
+    
+    return -1;
+}
+
+
 function isConnector(char){
     return connectors.indexOf(char) >= 0 // encontrou?
 }
@@ -64,6 +118,40 @@ function isValidExpression(expression){
 }
 
 /*
+ Analisa uma lista de connetores e determina qual é o connector predominante
+ */
+function getPredominantConnector(connectors){
+    
+    var predominantConnector;
+    
+    for(var i=0; i < connectors.length; i++){
+        
+        if(predominantConnector == undefined){
+            predominantConnector = connectors[i];
+        }
+        else if(connectors[i].precedence < predominantConnector.precedence){ // current loop connector must be resolved before the actual predominant connector?
+            predominantConnector = connectors[i];
+        }
+        else if(connectors[i].precedence == predominantConnector.precedence) {
+            if(connectors[i].orientation == 'LR'){
+                if(connectors[i].position < predominantConnector.position){// Left to Right and the current connector occurs after of the actual predominant connector
+                    predominantConnector = connectors[i];
+                }
+            }
+            else{
+                if(connectors[i].position > predominantConnector.position){ // Right to Left and the current connector occurs before of the actual predominant connector
+                    predominantConnector = connectors[i];
+                }
+            }
+        }
+    }
+    
+    //caso nao exista connector, deve retornar -1
+    return connectors.length > 0 ? predominantConnector.position : -1; 
+}
+
+
+/*
 - a partir desta função é possível quebrar a expressão em duas partes, localizando seu connector
 - serve de base para uma segunda função que vai montar um objeto com as duas partes da função e seu connector e depois
 de forma recursiva, quebrar todas as partes da expressao
@@ -72,6 +160,7 @@ function getConnectorPosition(expression){
     
     var countIgnore = false;
     var currentChar = undefined;
+    var connectorsLocalized = [];
     
     for( var i=0; i < expression.length; i++){
         currentChar = expression[i];
@@ -82,34 +171,35 @@ function getConnectorPosition(expression){
             countIgnore--;
         }
         
-        if(countIgnore == 0 && isConnector(currentChar)){
-            return i;   
+        if(countIgnore == 0 && isConnector(currentChar)){ // adaptar isConnector para identificar atraves do novo objeto
+            var connector = getConnector(currentChar);
+            connector.position = i;
+            connectorsLocalized.push(connector);
         }
     }
-    
-    return -1;
+   
+    return getPredominantConnector(connectorsLocalized); //send the list of connectors and positions of ocurrency in the expression
 }
 function removeParenteses(expression){
-    
-    var openPositions = [];
-    var closePositions = [];
-    var firstOpenPosition;
-    
-    for( i = 0; i < expression.length; i++ ){
-        if(expression[i] == '(' && firstOpenPosition == undefined){
-            firstOpenPosition = i;
+    var opened = false;
+    for( var i=1; i < expression.length -1; i++){// search on the mid of the first and last characters 
+        
+        if(expression[i] == '('){
+            opened = true;
         }
-        else{
-            if(expression[i] == '('){
-                openPositions.push(i);
-            }
-            else if( expression[i] == ')'){
-                closePositions.push(i);
-            }
+        else if(expression[i] == ')'){
+            opened = false;
         }
+        
+    }    
+    
+    if(expression[0]=='(' && expression[expression.length - 1] == ')' && opened == false){
+        return expression.substring(1,expression.length - 1);
+    }
+    else{
+        return expression;
     }
     
-    return expression.substring(firstOpenPosition + 1,closePositions[closePositions.length - 1]);
 }
 
 function getNodes(expression){
