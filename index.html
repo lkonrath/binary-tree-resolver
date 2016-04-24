@@ -1,29 +1,55 @@
-<!doctype html>
+<!DOCTYPE HTML>
 
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="utf-8">
-  <title>Binary Tree Resolver</title>
-  <link rel='stylesheet' type='text/css' href='style.css'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Binary Tree Resolver</title>
+    <link rel='stylesheet' type='text/css' href='css/resets.css'>
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+    <link rel='stylesheet' type='text/css' href='css/page.css'>
 </head>
 
 <body>
-  <script src="BTR.js"></script>
-  <script src="font-size-switcher.js"></script>
-  
-  <div>
-      <button id='btn-increase'>Increase</button>
-      <button id='btn-decrease'>Decrease</button>
-  </div>
-  <p>
-      <!--<input type="text" id='expression' name='expression' value='(((P ∧ Q) ∧ (Q ∧ R)) → ((Q ↔ P) ∨ (¬¬ R)))'/>-->
-      <input type="text" id='expression' name='expression' value='P ∧ Q → R'/>
-      <button id='btn-go'>Go!</button>
-  </p>
-  <div class="widget body font-size-100">
-  </div>
-  <script>
-      function buildExpressionTree(node){
+    <script src="javascript/BTR.js"></script>
+    <script src="javascript/font-size-switcher.js"></script>
+    <div class="page">
+        <header class="page-header">
+            <nav class="page-navbar page-navbar-left">
+                <ul>
+                    <li>Binary Tree Resolver</li>
+                </ul>
+            </nav>
+            <nav class="page-navbar page-navbar-right">
+                <ul>
+                    <li>
+                        <button id='btn-decrease'>A-</button>
+                    </li>
+                    <li>
+                        <button id='btn-increase'>A+</button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section class="page-section page-section-builder">
+            <article>
+                <input type="text" id='expression' name='expression' value='P ∧ Q → R' />
+                <button id='btn-go'>Go!</button>
+            </article>
+        </section>
+        <section class="page-section page-section-display">
+            <article class="widget body font-size-100">
+            </article>
+        </section>
+        <footer class="page-footer">
+            <p>powered by Lucas Konrath</p>
+        </footer>
+    </div>
+</body>
+
+
+<script>
+    function buildExpressionTree(node){
           
           var wrapper = document.createElement('div'); 
           var header = document.createElement('div'); 
@@ -75,6 +101,7 @@
              switchFontSize(element,'decrease');
           });          
       }
-  </script>
-</body>
+
+</script>
+
 </html>

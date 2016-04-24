@@ -1,0 +1,79 @@
+/*Page*/
+.page {
+    min-height: 100%;
+    position:relative;
+    padding-bottom: 300px;
+    /*box-sizing: border-box;*/
+}
+
+
+/*Header*/
+.page-header {
+    background-color:gray;
+    height: 50px;
+}
+
+
+/*Navs*/
+.page-navbar {
+    height: 100%;
+    margin-left:15px;
+    margin-right:15px;
+}
+.page-navbar > ul {
+    display:table;
+    height: 100%;
+}
+
+.page-navbar > ul > li {
+    display: table-cell;
+    vertical-align:middle;
+}
+
+.page-navbar.page-navbar-right {
+   float:right; 
+}
+.page-navbar.page-navbar-left {
+   float:left; 
+}
+
+
+
+
+
+
+
+
+
+/*Sections*/
+.page-section.page-section-builder {
+    background-color:#ECECEC;
+    font-size:24px;
+}
+.page-section.page-section-builder input,
+.page-section.page-section-builder button {
+    font-size:24px;
+}
+
+.page-section.page-section-builder > article {
+    text-align: center;
+    padding-top:50px;
+    padding-bottom:50px;
+}
+.page-section.page-section-display > article {
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+
+/*Footer*/
+.page-footer {
+    padding-top:50px;
+    padding-bottom:50px;
+    background-color:gray;
+    width:100%; 
+    position:absolute;  
+    height: 300px;
+    box-sizing:border-box; 
+    bottom: 0;
+}
