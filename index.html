@@ -9,12 +9,18 @@
 
 <body>
   <script src="BTR.js"></script>
+  <script src="font-size-switcher.js"></script>
+  
+  <div>
+      <button id='btn-increase'>Increase</button>
+      <button id='btn-decrease'>Decrease</button>
+  </div>
   <p>
       <!--<input type="text" id='expression' name='expression' value='(((P ∧ Q) ∧ (Q ∧ R)) → ((Q ↔ P) ∨ (¬¬ R)))'/>-->
       <input type="text" id='expression' name='expression' value='P ∧ Q → R'/>
       <button id='btn-go'>Go!</button>
   </p>
-  <div id='widget' class="body">
+  <div class="widget body font-size-100">
   </div>
   <script>
       function buildExpressionTree(node){
@@ -45,17 +51,29 @@
           var nodes = getNodes(expression);
           console.log(nodes)
           var tree = buildExpressionTree(nodes);
-          var widget = document.getElementById('widget');
+          var widget = document.getElementsByClassName('widget')[0];
           widget.appendChild(tree);
           console.log(tree);
       }
       
       window.onload = function(){
-          var button = document.getElementById('btn-go');
-          button.addEventListener('click',function(){
+          var btnGo = document.getElementById('btn-go');
+          btnGo.addEventListener('click',function(){
              var expression = document.getElementById('expression').value;
              displayExpression(expression);
           });
+          
+          var btnIncrease = document.getElementById('btn-increase');
+          btnIncrease.addEventListener('click',function(){
+             var element = document.getElementsByClassName('widget')[0];
+             switchFontSize(element,'increase');
+          });
+          
+          var btnDecrease = document.getElementById('btn-decrease');
+          btnDecrease.addEventListener('click',function(){
+             var element = document.getElementsByClassName('widget')[0];
+             switchFontSize(element,'decrease');
+          });          
       }
   </script>
 </body>
