@@ -60,6 +60,13 @@
     padding-top:50px;
     padding-bottom:50px;
 }
+
+.page-section.page-section-display {
+    display: none;
+}
+.page-section.page-section-display .page-section-display-header {
+    text-align: right;
+}
 .page-section.page-section-display > article {
     padding-top:50px;
     padding-bottom:50px;
@@ -77,3 +84,14 @@
     box-sizing:border-box; 
     bottom: 0;
 }
+
+
+/*Display visibility and animation*/
+.page.page-display-active .page-section-builder {
+    display: none;
+}
+.page.page-display-active .page-section-display {
+    display: block;
+}
+
+

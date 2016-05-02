@@ -8,6 +8,7 @@
     <link rel='stylesheet' type='text/css' href='css/resets.css'>
     <link rel='stylesheet' type='text/css' href='css/style.css'>
     <link rel='stylesheet' type='text/css' href='css/page.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -20,16 +21,6 @@
                     <li>Binary Tree Resolver</li>
                 </ul>
             </nav>
-            <nav class="page-navbar page-navbar-right">
-                <ul>
-                    <li>
-                        <button id='btn-decrease'>A-</button>
-                    </li>
-                    <li>
-                        <button id='btn-increase'>A+</button>
-                    </li>
-                </ul>
-            </nav>
         </header>
         <section class="page-section page-section-builder">
             <article>
@@ -38,6 +29,19 @@
             </article>
         </section>
         <section class="page-section page-section-display">
+            <div class="page-section-display-header">            
+                <button id='btn-decrease'>
+                    <i class="fa fa-font" aria-hidden="true"></i>
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+                <button id='btn-increase'>
+                    <i class="fa fa-font" aria-hidden="true"></i>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <button id='btn-new'>
+                    Nova Expressão
+                </button>                
+            </div>
             <article class="widget body font-size-100">
             </article>
         </section>
@@ -75,18 +79,25 @@
       
       function displayExpression(expression){
           var nodes = getNodes(expression);
-          console.log(nodes)
           var tree = buildExpressionTree(nodes);
           var widget = document.getElementsByClassName('widget')[0];
+          widget.innerHTML = '';
           widget.appendChild(tree);
-          console.log(tree);
       }
       
       window.onload = function(){
           var btnGo = document.getElementById('btn-go');
           btnGo.addEventListener('click',function(){
+             var page = document.getElementsByClassName('page')[0];
+             page.classList.add('page-display-active');
              var expression = document.getElementById('expression').value;
              displayExpression(expression);
+          });
+          
+          var btnNew = document.getElementById('btn-new');
+          btnNew.addEventListener('click',function(){
+             var page = document.getElementsByClassName('page')[0];
+             page.classList.remove('page-display-active');
           });
           
           var btnIncrease = document.getElementById('btn-increase');
