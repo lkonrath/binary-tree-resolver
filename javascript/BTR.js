@@ -16,7 +16,7 @@ String.prototype.replaceAt = function(position, char){ //substitui um caractere 
 }
 
 var connectors = ['∧','∨','→','↔'];
-var negation = '¬';
+var negation = ['¬','~'];
 
 
 function getConnectors(){
@@ -72,6 +72,9 @@ function getConnector(character){
 }
 
 
+function isNegation(char){
+    return negation.indexOf(char) >= 0 // encontrou?
+}
 function isConnector(char){
     return connectors.indexOf(char) >= 0 // encontrou?
 }
@@ -223,7 +226,7 @@ function getNodes(expression){
         node.subnodes.push(getNodes(rightExpression));  
     }
     else{ // Create sub nodes for negations
-        if(_expression.charAt(0) == negation){
+        if(isNegation(_expression.charAt(0))){
             node.subnodes.push(getNodes(_expression.substring(1,_expression.length)));
         }
     }
