@@ -85,6 +85,14 @@
     bottom: 0;
 }
 
+/*Display validation message*/
+.page .validation-message {
+    display: none;
+}
+.page.page-expression-invalid .validation-message {
+    display: block;
+}
+
 
 /*Display visibility and animation*/
 .page.page-display-active .page-section-builder {

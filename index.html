@@ -24,12 +24,34 @@
         </header>
         <section class="page-section page-section-builder">
             <article>
-                <input type="text" id='expression' name='expression' value='P ∧ Q → R' />
-                <button id='btn-go'>Go!</button>
+                <div>
+                    <div class="validation-message">
+                        Expressão inválida
+                    </div>
+                    <input type="text" id='expression' name='expression' value='P∧Q→R' readonly/>
+                </div>
+                <div class="keyboard">
+                    <button class="key" data-key="P">P</button>
+                    <button class="key" data-key="Q">Q</button>
+                    <button class="key" data-key="R">R</button>
+                    <button class="key" data-key="S">S</button>
+                    <button class="key" data-key="(">(</button>
+                    <button class="key" data-key=")">)</button>
+                    <button class="key" data-key="→">→</button>
+                    <button class="key" data-key="↔">↔</button>
+                    <button class="key" data-key="∧">∧</button>
+                    <button class="key" data-key="∨">∨</button>
+                    <button class="key" data-key="¬">¬</button>
+                    <button class="key" data-key="~">~</button>
+                    <button class="backspace">Backspace</button>
+                </div>
+                <div>
+                    <button id='btn-go'>Go!</button>
+                </div>
             </article>
         </section>
         <section class="page-section page-section-display">
-            <div class="page-section-display-header">            
+            <div class="page-section-display-header">
                 <button id='btn-decrease'>
                     <i class="fa fa-font" aria-hidden="true"></i>
                     <i class="fa fa-minus" aria-hidden="true"></i>
@@ -40,7 +62,7 @@
                 </button>
                 <button id='btn-new'>
                     Nova Expressão
-                </button>                
+                </button>
             </div>
             <article class="widget body font-size-100">
             </article>
@@ -88,10 +110,18 @@
       window.onload = function(){
           var btnGo = document.getElementById('btn-go');
           btnGo.addEventListener('click',function(){
+             
+             var expression = document.getElementById('expression').value; 
              var page = document.getElementsByClassName('page')[0];
-             page.classList.add('page-display-active');
-             var expression = document.getElementById('expression').value;
-             displayExpression(expression);
+             
+             if (isValidExpression(expression)){
+                page.classList.remove('page-expression-invalid');
+                page.classList.add('page-display-active');
+                displayExpression(expression);
+             }
+             else {
+                page.classList.add('page-expression-invalid');
+             }
           });
           
           var btnNew = document.getElementById('btn-new');
@@ -110,7 +140,24 @@
           btnDecrease.addEventListener('click',function(){
              var element = document.getElementsByClassName('widget')[0];
              switchFontSize(element,'decrease');
-          });          
+          });  
+          
+          var keys = document.getElementsByClassName('key');
+          for(var i=0; i < keys.length;i++){
+              keys[i].addEventListener('click',function(event){
+                  var key = event.target.getAttribute('data-key'); 
+                  var input = document.getElementById('expression');
+                  
+                  input.value = input.value + key;
+                  console.log(key);
+              });
+          }    
+          
+          var backspace = document.getElementsByClassName('backspace')[0];
+          backspace.addEventListener('click',function(){
+              var input = document.getElementById('expression');
+              input.value = input.value.substring(0,input.value.length -1);
+          })    
       }
 
 </script>
