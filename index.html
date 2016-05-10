@@ -26,7 +26,7 @@
             <article>
                 <div>
                     <div class="validation-message">
-                        Expressão inválida
+                        Expressão inválida! certifique-se de compor uma expressão válida utilizando as teclas disponíveis na interface e tente novamente
                     </div>
                     <input type="text" id='expression' name='expression' value='P∧Q→R' readonly/>
                 </div>
@@ -114,7 +114,7 @@
              var expression = document.getElementById('expression').value; 
              var page = document.getElementsByClassName('page')[0];
              
-             if (isValidExpression(expression)){
+             if (isValidExpression(expression) && expression != ''){
                 page.classList.remove('page-expression-invalid');
                 page.classList.add('page-display-active');
                 displayExpression(expression);
