@@ -1,0 +1,26 @@
+.btn {
+    font-size:14px;
+    padding:6px 12px;
+    cursor:pointer;
+    border:1px solid white;
+    line-height: 1.3333333;
+}
+
+.btn.btn-default {
+    background-color:whitesmoke;
+    border-color:lightgray;
+}
+.btn.btn-primary {
+    background-color:darkgray;
+    border-color:gray;
+    color:white;
+}
+
+.btn.btn-lg {
+    font-size:18px;
+    padding:10px 16px;
+}
+.btn.btn-sm {
+    font-size:12px;
+    padding:5px 10px;
+}

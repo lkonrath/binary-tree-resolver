@@ -2,6 +2,10 @@ body {
     background-color:whitesmoke;
 }
 
+body,button {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
 .wrapper {
     display: table-cell;
     width: 50%;
@@ -15,6 +19,11 @@ body {
     display: table;
     width: 100%;
     text-align: center;
+}
+
+.keyboard {
+    margin-top:15px;
+    margin-bottom:15px;
 }
 
 

@@ -8,7 +8,11 @@
     <link rel='stylesheet' type='text/css' href='css/resets.css'>
     <link rel='stylesheet' type='text/css' href='css/style.css'>
     <link rel='stylesheet' type='text/css' href='css/page.css'>
+    <link rel='stylesheet' type='text/css' href='css/animate.css'>
+    <link rel='stylesheet' type='text/css' href='css/animate-extension.css'>
+    <link rel='stylesheet' type='text/css' href='css/button.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,700,500,300' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -22,45 +26,45 @@
                 </ul>
             </nav>
         </header>
-        <section class="page-section page-section-builder">
+        <section class="page-section page-section-builder animated grow">
             <article>
                 <div>
-                    <div class="validation-message">
+                    <div class="validation-message animated fadeOut">
                         Expressão inválida! certifique-se de compor uma expressão válida utilizando as teclas disponíveis na interface e tente novamente
                     </div>
-                    <input type="text" id='expression' name='expression' value='P∧Q→R' readonly/>
+                    <input type="text" id='expression' name='expression' value='P∧Q→R' style="background-color:white;border:none;padding:4px 8px;font-size:24px;" readonly/>
                 </div>
                 <div class="keyboard">
-                    <button class="key" data-key="P">P</button>
-                    <button class="key" data-key="Q">Q</button>
-                    <button class="key" data-key="R">R</button>
-                    <button class="key" data-key="S">S</button>
-                    <button class="key" data-key="(">(</button>
-                    <button class="key" data-key=")">)</button>
-                    <button class="key" data-key="→">→</button>
-                    <button class="key" data-key="↔">↔</button>
-                    <button class="key" data-key="∧">∧</button>
-                    <button class="key" data-key="∨">∨</button>
-                    <button class="key" data-key="¬">¬</button>
-                    <button class="key" data-key="~">~</button>
-                    <button class="backspace">Backspace</button>
+                    <button class="btn btn-default key" data-key="P">P</button>
+                    <button class="btn btn-default key" data-key="Q">Q</button>
+                    <button class="btn btn-default key" data-key="R">R</button>
+                    <button class="btn btn-default key" data-key="S">S</button>
+                    <button class="btn btn-default key" data-key="(">(</button>
+                    <button class="btn btn-default key" data-key=")">)</button>
+                    <button class="btn btn-default key" data-key="→">→</button>
+                    <button class="btn btn-default key" data-key="↔">↔</button>
+                    <button class="btn btn-default key" data-key="∧">∧</button>
+                    <button class="btn btn-default key" data-key="∨">∨</button>
+                    <button class="btn btn-default key" data-key="¬">¬</button>
+                    <button class="btn btn-default key" data-key="~">~</button>
+                    <button class="btn btn-default backspace">Backspace</button>
                 </div>
                 <div>
-                    <button id='btn-go'>Go!</button>
+                    <button id="btn-go" class="btn btn-primary btn-lg">Resolve</button>
                 </div>
             </article>
         </section>
-        <section class="page-section page-section-display">
+        <section class="page-section page-section-display animated fadeOut">
             <div class="page-section-display-header">
-                <button id='btn-decrease'>
+                <button id="btn-decrease" class="btn btn-default">
                     <i class="fa fa-font" aria-hidden="true"></i>
                     <i class="fa fa-minus" aria-hidden="true"></i>
                 </button>
-                <button id='btn-increase'>
+                <button id="btn-increase" class="btn btn-default">
                     <i class="fa fa-font" aria-hidden="true"></i>
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
-                <button id='btn-new'>
+                <button id="btn-new" class="btn btn-primary">
                     Nova Expressão
                 </button>
             </div>
@@ -75,6 +79,35 @@
 
 
 <script>
+    
+    function showTree(){
+          
+          var sectionBuilder = document.getElementsByClassName('page-section-builder')[0];
+          var sectionDisplay = document.getElementsByClassName('page-section-display')[0];
+          
+          sectionBuilder.classList.remove('grow');
+          sectionBuilder.classList.add('fadeOut');
+          
+          
+          sectionDisplay.classList.remove('fadeOut');
+          sectionDisplay.classList.add('fadeIn');
+             
+      }
+      
+      function hideTree(){
+          
+          var sectionBuilder = document.getElementsByClassName('page-section-builder')[0];
+          var sectionDisplay = document.getElementsByClassName('page-section-display')[0];
+          
+          sectionBuilder.classList.remove('fadeOut');
+          sectionBuilder.classList.add('grow');
+          
+          
+          sectionDisplay.classList.remove('fadeIn');
+          sectionDisplay.classList.add('fadeOut');
+          
+      }
+    
     function buildExpressionTree(node){
           
           var wrapper = document.createElement('div'); 
@@ -107,27 +140,38 @@
           widget.appendChild(tree);
       }
       
+      
+      
+      
+      
+      
       window.onload = function(){
           var btnGo = document.getElementById('btn-go');
           btnGo.addEventListener('click',function(){
              
              var expression = document.getElementById('expression').value; 
              var page = document.getElementsByClassName('page')[0];
+             var validationMessage = document.getElementsByClassName('validation-message')[0];
+                 
              
              if (isValidExpression(expression) && expression != ''){
-                page.classList.remove('page-expression-invalid');
-                page.classList.add('page-display-active');
+                showTree();
+                
+                validationMessage.classList.remove('fadeIn');
+                validationMessage.classList.add('fadeOut');
+                
                 displayExpression(expression);
              }
              else {
-                page.classList.add('page-expression-invalid');
+                 validationMessage.classList.remove('fadeOut');
+                 validationMessage.classList.add('fadeIn'); 
              }
           });
           
           var btnNew = document.getElementById('btn-new');
           btnNew.addEventListener('click',function(){
              var page = document.getElementsByClassName('page')[0];
-             page.classList.remove('page-display-active');
+             hideTree();
           });
           
           var btnIncrease = document.getElementById('btn-increase');
@@ -149,7 +193,6 @@
                   var input = document.getElementById('expression');
                   
                   input.value = input.value + key;
-                  console.log(key);
               });
           }    
           
