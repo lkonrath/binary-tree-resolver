@@ -1,7 +1,3 @@
-body {
-    background-color:whitesmoke;
-}
-
 body,button {
     font-family: 'Alegreya Sans', sans-serif;
 }
@@ -21,9 +17,36 @@ body,button {
     text-align: center;
 }
 
+.expression-backspace {
+    cursor:pointer;
+}
+
 .keyboard {
     margin-top:15px;
     margin-bottom:15px;
+    text-align: center;
+}
+
+.keyboard > .keyboard-left{
+    display: inline-block;
+    vertical-align: top;
+    margin-right:-4px;
+}
+.keyboard > .keyboard-right{
+    display: inline-block;
+    vertical-align: top;
+    padding-left:15px;
+    text-align: left;
+}
+
+.keyboard .keyboard-row {
+    margin-bottom: 5px;
+}
+
+.keyboard .keyboard-row > .key {
+    line-height: 30px;
+    min-width: 30px;
+    box-sizing: border-box;
 }
 
 

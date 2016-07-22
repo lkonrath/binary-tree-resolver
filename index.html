@@ -11,13 +11,16 @@
     <link rel='stylesheet' type='text/css' href='css/animate.css'>
     <link rel='stylesheet' type='text/css' href='css/animate-extension.css'>
     <link rel='stylesheet' type='text/css' href='css/button.css'>
+    <link rel='stylesheet' type='text/css' href='css/keys.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:400,700,500,300' rel='stylesheet' type='text/css'>
+
+    <script src="javascript/BTR.js"></script>
+    <script src="javascript/font-size-switcher.js"></script>
 </head>
 
 <body>
-    <script src="javascript/BTR.js"></script>
-    <script src="javascript/font-size-switcher.js"></script>
     <div class="page">
         <header class="page-header">
             <nav class="page-navbar page-navbar-left">
@@ -26,32 +29,75 @@
                 </ul>
             </nav>
         </header>
-        <section class="page-section page-section-builder animated grow">
+        <section class="page-section page-section-builder animated fadeIn">
             <article>
+                <div class="expression">
+                    <input type="text" id="expression-input" placeholder="Build your expression ..." name="expression" readonly/>
+                    <i class="material-icons expression-backspace">backspace</i>
+                </div>
                 <div>
                     <div class="validation-message animated fadeOut">
                         Expressão inválida! certifique-se de compor uma expressão válida utilizando as teclas disponíveis na interface e tente novamente
                     </div>
-                    <input type="text" id='expression' name='expression' value='P∧Q→R' style="background-color:white;border:none;padding:4px 8px;font-size:24px;" readonly/>
                 </div>
                 <div class="keyboard">
-                    <button class="btn btn-default key" data-key="P">P</button>
-                    <button class="btn btn-default key" data-key="Q">Q</button>
-                    <button class="btn btn-default key" data-key="R">R</button>
-                    <button class="btn btn-default key" data-key="S">S</button>
-                    <button class="btn btn-default key" data-key="(">(</button>
-                    <button class="btn btn-default key" data-key=")">)</button>
-                    <button class="btn btn-default key" data-key="→">→</button>
-                    <button class="btn btn-default key" data-key="↔">↔</button>
-                    <button class="btn btn-default key" data-key="∧">∧</button>
-                    <button class="btn btn-default key" data-key="∨">∨</button>
-                    <button class="btn btn-default key" data-key="¬">¬</button>
-                    <button class="btn btn-default key" data-key="~">~</button>
-                    <button class="btn btn-default backspace">Backspace</button>
+                    <div class="keyboard-left">
+                        <!-- first line -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="Q">Q</button>
+                            <button class="key" data-key="W">W</button>
+                            <button class="key" data-key="E">E</button>
+                            <button class="key" data-key="R">R</button>
+                            <button class="key" data-key="T">T</button>
+                            <button class="key" data-key="Y">Y</button>
+                            <button class="key" data-key="U">U</button>
+                            <button class="key" data-key="I">I</button>
+                            <button class="key" data-key="O">O</button>
+                            <button class="key" data-key="P">P</button>
+                        </div>
+                        <!-- second line -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="A">A</button>
+                            <button class="key" data-key="S">S</button>
+                            <button class="key" data-key="D">D</button>
+                            <button class="key" data-key="F">F</button>
+                            <button class="key" data-key="G">G</button>
+                            <button class="key" data-key="H">H</button>
+                            <button class="key" data-key="J">J</button>
+                            <button class="key" data-key="K">K</button>
+                            <button class="key" data-key="L">L</button>
+                        </div>
+                        <!-- third line -->
+                        <div class="keyboard-row">
+                            <button class="key" data-key="Z">Z</button>
+                            <button class="key" data-key="X">X</button>
+                            <button class="key" data-key="C">C</button>
+                            <button class="key" data-key="V">V</button>
+                            <button class="key" data-key="B">B</button>
+                            <button class="key" data-key="N">N</button>
+                            <button class="key" data-key="M">M</button>
+                        </div>
+                    </div>
+                    <div class="keyboard-right">
+                        <div class="keyboard-row">
+                            <button class="key" data-key="(">(</button>
+                            <button class="key" data-key=")">)</button>
+                            <button class="key" data-key="¬">¬</button>
+                        </div>
+                        <div class="keyboard-row">
+                            <button class="key" data-key="→">→</button>
+                            <button class="key" data-key="↔">↔</button>
+                        </div>
+                        <div class="keyboard-row">
+                            <button class="key" data-key="∧">∧</button>
+                            <button class="key" data-key="∨">∨</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <button id="btn-go" class="btn btn-primary btn-lg">Resolve</button>
+                <div style="margin-top:50px;text-align:center;">
+                    <button type="button" id="btn-go" class="btn btn-primary btn-lg">Resolve</button>
                 </div>
+
             </article>
         </section>
         <section class="page-section page-section-display animated fadeOut">
@@ -65,21 +111,20 @@
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
                 <button id="btn-new" class="btn btn-primary">
-                    Nova Expressão
+                    New expression
                 </button>
             </div>
             <article class="widget body font-size-100">
             </article>
         </section>
-        <footer class="page-footer">
-            <p>powered by Lucas Konrath</p>
-        </footer>
     </div>
+    <footer class="page-footer">
+        <p>powered by Lucas Konrath</p>
+    </footer>
 </body>
 
 
 <script>
-    
     function showTree(){
           
           var sectionBuilder = document.getElementsByClassName('page-section-builder')[0];
@@ -149,7 +194,7 @@
           var btnGo = document.getElementById('btn-go');
           btnGo.addEventListener('click',function(){
              
-             var expression = document.getElementById('expression').value; 
+             var expression = document.getElementById('expression-input').value; 
              var page = document.getElementsByClassName('page')[0];
              var validationMessage = document.getElementsByClassName('validation-message')[0];
                  
@@ -190,15 +235,15 @@
           for(var i=0; i < keys.length;i++){
               keys[i].addEventListener('click',function(event){
                   var key = event.target.getAttribute('data-key'); 
-                  var input = document.getElementById('expression');
+                  var input = document.getElementById('expression-input');
                   
                   input.value = input.value + key;
               });
           }    
           
-          var backspace = document.getElementsByClassName('backspace')[0];
+          var backspace = document.getElementsByClassName('expression-backspace')[0];
           backspace.addEventListener('click',function(){
-              var input = document.getElementById('expression');
+              var input = document.getElementById('expression-input');
               input.value = input.value.substring(0,input.value.length -1);
           })    
       }

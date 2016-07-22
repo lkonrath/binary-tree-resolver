@@ -1,18 +1,3 @@
 .fadeOut {
   display:none;
 }
-
-
-@keyframes grow {
-  from {
-    margin-top: -100%;
-  }
-  to {
-    margin-top:0;
-  }
-}
-
-.grow {
-  -webkit-animation-name: grow;
-  animation-name: grow;
-}
